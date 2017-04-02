@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 26, 2017 at 07:54 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Хост: 127.0.0.1
+-- Время создания: Апр 02 2017 г., 22:20
+-- Версия сервера: 10.1.21-MariaDB
+-- Версия PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,45 +17,46 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project`
+-- База данных: `recipe`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Структура таблицы `category`
 --
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `image` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `category`
+-- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Quick&Easy'),
-(2, 'Kid Friendly'),
-(3, 'Entertaining'),
-(4, 'Weeknight'),
-(5, 'Cookout'),
-(6, 'Globally inspired'),
-(7, 'Spring'),
-(8, 'Summer'),
-(9, 'Winter'),
-(10, 'Fall'),
-(11, 'Chicken'),
-(12, 'Beef'),
-(13, 'Pork'),
-(14, 'Seafood'),
-(15, 'Vegetarian');
+INSERT INTO `category` (`id`, `name`, `image`) VALUES
+(1, 'Quick&Easy', ''),
+(2, 'Kid Friendly', ''),
+(3, 'Entertaining', ''),
+(4, 'Weeknight', ''),
+(5, 'Cookout', '5.jpg'),
+(6, 'Globally inspired', ''),
+(7, 'Spring', ''),
+(8, 'Summer', ''),
+(9, 'Winter', ''),
+(10, 'Fall', ''),
+(11, 'Chicken', ''),
+(12, 'Beef', ''),
+(13, 'Pork', ''),
+(14, 'Seafood', '14.jpg'),
+(15, 'Vegetarian', '15.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipe`
+-- Структура таблицы `recipe`
 --
 
 CREATE TABLE `recipe` (
@@ -64,35 +65,36 @@ CREATE TABLE `recipe` (
   `prepare_time` int(11) NOT NULL COMMENT 'minutes',
   `cook_time` int(11) NOT NULL COMMENT 'minutes',
   `calorie` int(11) NOT NULL,
-  `typeId` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
   `serving` int(2) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image` varchar(30) NOT NULL,
-  `userId` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `recipe`
+-- Дамп данных таблицы `recipe`
 --
 
-INSERT INTO `recipe` (`id`, `name`, `prepare_time`, `cook_time`, `calorie`, `typeId`, `serving`, `date`, `image`, `userId`) VALUES
-(4, 'Creamy Salad Dressing', 10, 5, 50, 1, 4, '2017-03-26 15:49:38', '4.jpg', 1),
-(5, 'Italian Salad Dressing', 10, 15, 80, 1, 6, '2017-03-26 15:59:33', '5.jpg', 2),
-(6, 'Party Cheese Ball Made Over', 15, 75, 120, 2, 25, '2017-03-26 16:09:45', '6.jpg', 7),
-(7, 'Strawberry Spinach Salad', 20, 70, 500, 3, 4, '2017-03-26 16:15:34', '7.jpg', 7),
-(8, 'Cucumber-Carrot Salad', 15, 45, 60, 3, 6, '2017-03-26 16:21:14', '8.jpg', 6),
-(9, 'Tandoori Chicken Salad', 30, 20, 350, 3, 4, '2017-03-26 16:27:49', '9.jpg', 5),
-(10, 'Delicious Ham and Potato Soup', 20, 25, 195, 4, 4, '2017-03-26 16:34:09', '10.jpg', 5),
-(11, 'Simply Roasted Artichokes', 5, 80, 200, 5, 4, '2017-03-26 16:41:21', '11.jpg', 5),
-(12, 'Lebanese Bean Salad', 10, 130, 300, 6, 10, '2017-03-26 16:52:01', '12.jpg', 4),
-(13, 'Classic Macaroni Salad', 10, 20, 390, 7, 20, '2017-03-26 16:58:32', '13.jpg', 5),
-(14, 'Puff Pastry Waffles', 5, 3, 338, 8, 10, '2017-03-26 17:05:18', '14.jpg', 1),
-(15, 'San Francisco Pork Chops', 15, 45, 100, 9, 10, '2017-03-26 17:24:27', '15.jpg', 7);
+INSERT INTO `recipe` (`id`, `name`, `prepare_time`, `cook_time`, `calorie`, `type_id`, `serving`, `date`, `image`, `user_id`, `description`) VALUES
+(4, 'Creamy Salad Dressing', 10, 5, 50, 1, 4, '2017-03-26 15:49:38', '4.jpg', 1, 'It\'s complex and lovely, perfect for dressing a simple plate of greens, like our favorite side salad, or for using as a dip for party platter of veggies.'),
+(5, 'Italian Salad Dressing', 10, 15, 80, 1, 6, '2017-03-26 15:59:33', '5.jpg', 2, 'This Basic Italian Salad dressing is great for turning mixed greens, steamed broccoli or asparagus spears into a delicious salad.'),
+(6, 'Party Cheese Ball Made Over', 15, 75, 120, 2, 25, '2017-03-26 16:09:45', '6.jpg', 7, 'No one will guess this is a better-for-you version of the classic cheese ball! The secret? Light cheese and chopped parsley instead of nuts for the coating.'),
+(7, 'Strawberry Spinach Salad', 20, 70, 500, 3, 4, '2017-03-26 16:15:34', '7.jpg', 7, 'This spinach and strawberry salad is topped with a fabulous homemade poppy seed dressing.'),
+(8, 'Cucumber-Carrot Salad', 15, 45, 60, 3, 6, '2017-03-26 16:21:14', '8.jpg', 6, 'This is super easy, very tasty and travels well so its great for picnics, lunch bags, whatever. It tastes wonderful at room temperature.'),
+(9, 'Tandoori Chicken Salad', 30, 20, 350, 3, 4, '2017-03-26 16:27:49', '9.jpg', 5, 'Tangy grilled chicken atop a bed of greens mixed with onions, raisins, almonds, pineapple, mint sprigs, and lime. Includes a zesty Indian-style salad dressing.'),
+(10, 'Delicious Ham and Potato Soup', 20, 25, 195, 4, 4, '2017-03-26 16:34:09', '10.jpg', 5, 'This is a delicious recipe for ham and potato soup that a friend gave to me. It is very easy and the great thing about it is that you can add additional ingredients.'),
+(11, 'Simply Roasted Artichokes', 5, 80, 200, 5, 4, '2017-03-26 16:41:21', '11.jpg', 5, 'This recipe emphasizes the pure flavor of the artichoke: simple and delicious!'),
+(12, 'Lebanese Bean Salad', 10, 130, 300, 6, 10, '2017-03-26 16:52:01', '12.jpg', 4, 'Quick, easy, and tasty. Can be used as a side dish or a snack on it\'s own. Great as a salad topper. Good with sea salt kettle chips, or toast.'),
+(13, 'Classic Macaroni Salad', 10, 20, 390, 7, 20, '2017-03-26 16:58:32', '13.jpg', 5, 'This classic macaroni salad is a crowd-pleaser at every cookout, potluck, and picnic!'),
+(14, 'Puff Pastry Waffles', 5, 3, 338, 8, 10, '2017-03-26 17:05:18', '14.jpg', 1, 'Turn puff pastry into waffles that are crispy on the outside and tender on the inside for a sweet breakfast treat ready in minutes'),
+(15, 'San Francisco Pork Chops', 15, 45, 100, 9, 10, '2017-03-26 17:24:27', '15.jpg', 7, 'Tender pork chops simmer in a sweet and savory sauce flavored with beef broth, garlic, and soy sauce with just a pinch of red pepper flakes for zing.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipe_category`
+-- Структура таблицы `recipe_category`
 --
 
 CREATE TABLE `recipe_category` (
@@ -102,7 +104,7 @@ CREATE TABLE `recipe_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `recipe_category`
+-- Дамп данных таблицы `recipe_category`
 --
 
 INSERT INTO `recipe_category` (`id`, `recipe_id`, `category_id`) VALUES
@@ -150,7 +152,7 @@ INSERT INTO `recipe_category` (`id`, `recipe_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipe_comment`
+-- Структура таблицы `recipe_comment`
 --
 
 CREATE TABLE `recipe_comment` (
@@ -161,7 +163,7 @@ CREATE TABLE `recipe_comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `recipe_comment`
+-- Дамп данных таблицы `recipe_comment`
 --
 
 INSERT INTO `recipe_comment` (`id`, `recipe_id`, `comment`, `user_id`) VALUES
@@ -172,7 +174,7 @@ INSERT INTO `recipe_comment` (`id`, `recipe_id`, `comment`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipe_ingridient`
+-- Структура таблицы `recipe_ingridient`
 --
 
 CREATE TABLE `recipe_ingridient` (
@@ -184,7 +186,7 @@ CREATE TABLE `recipe_ingridient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `recipe_ingridient`
+-- Дамп данных таблицы `recipe_ingridient`
 --
 
 INSERT INTO `recipe_ingridient` (`id`, `recipe_id`, `name`, `quantity`, `description`) VALUES
@@ -302,7 +304,7 @@ INSERT INTO `recipe_ingridient` (`id`, `recipe_id`, `name`, `quantity`, `descrip
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipe_prepare`
+-- Структура таблицы `recipe_prepare`
 --
 
 CREATE TABLE `recipe_prepare` (
@@ -313,7 +315,7 @@ CREATE TABLE `recipe_prepare` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `recipe_prepare`
+-- Дамп данных таблицы `recipe_prepare`
 --
 
 INSERT INTO `recipe_prepare` (`id`, `recipe_id`, `step`, `description`) VALUES
@@ -349,7 +351,7 @@ INSERT INTO `recipe_prepare` (`id`, `recipe_id`, `step`, `description`) VALUES
 (36, 13, 1, 'Bring a large pot of lightly salted water to a boil. Add the macaroni, and cook until tender, about 8 minutes. Rinse under cold water and drain.'),
 (37, 13, 2, 'In a large bowl, mix together the mayonnaise, vinegar, sugar, mustard, salt and pepper. Stir in the onion, celery, green pepper, carrot, pimentos and macaroni. Refrigerate for at least 4 hours before serving, but preferably overnight.'),
 (38, 14, 1, 'Line a cutting board with parchment paper. Unfold puff pastry onto cutting board. Cut each sheet into 4 equal squares.'),
-(39, 14, 2, 'Preheat a waffle iron according to manufacturer''s instructions. Grease with cooking spray.'),
+(39, 14, 2, 'Preheat a waffle iron according to manufacturer\'s instructions. Grease with cooking spray.'),
 (40, 14, 3, 'Place one puff pastry square in the preheated waffle iron; cook until golden brown, 3 to 5 minutes. Repeat with remaining puff pastry squares.'),
 (41, 15, 1, 'Heat 1 tablespoon vegetable oil in a skillet over medium heat. Brown chops in hot oil, about 5 minutes per side; remove pork to a plate, reserving oil in skillet.'),
 (42, 15, 2, 'Cook and stir garlic in reserved drippings until fragrant, about 1 minute. Whisk beef broth, soy sauce, brown sugar, 2 teaspoons vegetable oil, and red pepper flakes in a bowl, dissolving brown sugar. Return pork chops to skillet and pour soy sauce mixture over the chops. Bring sauce to a boil, cover skillet, and reduce heat to low. Simmer chops until tender, 30 to 35 minutes, turning once halfway through cooking.'),
@@ -358,7 +360,7 @@ INSERT INTO `recipe_prepare` (`id`, `recipe_id`, `step`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipe_rating`
+-- Структура таблицы `recipe_rating`
 --
 
 CREATE TABLE `recipe_rating` (
@@ -369,7 +371,7 @@ CREATE TABLE `recipe_rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `recipe_rating`
+-- Дамп данных таблицы `recipe_rating`
 --
 
 INSERT INTO `recipe_rating` (`id`, `recipe_id`, `user_id`, `rating`) VALUES
@@ -391,7 +393,7 @@ INSERT INTO `recipe_rating` (`id`, `recipe_id`, `user_id`, `rating`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type`
+-- Структура таблицы `type`
 --
 
 CREATE TABLE `type` (
@@ -402,7 +404,7 @@ CREATE TABLE `type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `type`
+-- Дамп данных таблицы `type`
 --
 
 INSERT INTO `type` (`id`, `name`, `image`, `description`) VALUES
@@ -410,10 +412,10 @@ INSERT INTO `type` (`id`, `name`, `image`, `description`) VALUES
 (2, 'Appetizers', '2.jpg', 'Are you going to have a dinner party? Maybe you just want to spice up your Wednesday night dinner routine? Serve a multiple course meal with these great appetizer recipes! Or...better yet...throw an appetizer party!'),
 (3, 'Salads & Sandwiches', '3.jpg', 'Salads were food dishes that were often very crisp, and served at full meals, sometimes alongside meat.'),
 (4, 'Soups & Stews', '4.jpg', 'Soup is a primarily liquid food, generally served warm or hot (but may be cool or cold), that is made by combining ingredients such as meat and vegetables with stock, juice, water, or another liquid. Hot soups are additionally characterized by boiling solid ingredients in liquids in a pot until the flavors are extracted, forming a broth.'),
-(5, 'Vegetables', '5.jpg', 'In everyday usage, a vegetable is any part of a plant that is consumed by humans as food as part of a meal. The term vegetable is somewhat arbitrary, and largely defined through culinary and cultural tradition. It normally excludes other food derived from plants such as fruits, nuts, and cereal grains, but includes seeds such as pulses. The original meaning of the word vegetable, still used in biology, was to describe all types of plant, as in the terms "vegetable kingdom" and "vegetable matter".'),
+(5, 'Vegetables', '5.jpg', 'In everyday usage, a vegetable is any part of a plant that is consumed by humans as food as part of a meal. The term vegetable is somewhat arbitrary, and largely defined through culinary and cultural tradition. It normally excludes other food derived from plants such as fruits, nuts, and cereal grains, but includes seeds such as pulses. The original meaning of the word vegetable, still used in biology, was to describe all types of plant, as in the terms \"vegetable kingdom\" and \"vegetable matter\".'),
 (6, 'Rice, Grains, & Beans', '6.jpg', 'Rice and beans are a staple food in many cultures around the world. It provides several important nutrients, and is widely available.'),
 (7, 'Pasta', '7.jpg', 'Pasta  is a staple food of traditional Italian cuisine, with the first reference dating to 1154 in Sicily. It is also commonly used to refer to the variety of pasta dishes. Typically, pasta is a noodle made from an unleavened dough of a durum wheat flour mixed with water or eggs and formed into sheets or various shapes, then cooked by boiling or baking. It can also be made with flour from other cereals or grains.[citation needed] Pastas may be divided into two broad categories, dried (pasta secca) and fresh (pasta fresca).'),
-(8, 'Eggs & Breakfast', '8.jpg', 'Breakfast is the first meal of a day, most often eaten in the early morning before undertaking the day''s work. Among English speakers, "breakfast" can be used to refer to this meal or to refer to a meal composed of traditional breakfast foods (such as eggs, porridge and sausage) served at any time of day. The word literally refers to breaking the fasting period of the prior night'),
+(8, 'Eggs & Breakfast', '8.jpg', 'Breakfast is the first meal of a day, most often eaten in the early morning before undertaking the day\'s work. Among English speakers, \"breakfast\" can be used to refer to this meal or to refer to a meal composed of traditional breakfast foods (such as eggs, porridge and sausage) served at any time of day. The word literally refers to breaking the fasting period of the prior night'),
 (9, 'Meat', '9.jpg', 'Meat is mainly composed of water, protein, and fat. It is edible raw, but is normally eaten after it has been cooked and seasoned or processed in a variety of ways. Unprocessed meat will spoil or rot within hours or days as a result of infection with and decomposition by bacteria and fungi.'),
 (11, 'Bread & Pizza', '11.jpg', 'Pizza is a yeasted flatbread generally topped with tomato sauce and cheese and baked in an oven. It is commonly topped with a selection of meats, vegetables and condiments. The term was first recorded in the 10th century, in a Latin manuscript from Gaeta in Central Italy. The modern pizza was invented in Naples, Italy, and the dish and its variants have since become popular and common in many areas of the world.'),
 (12, 'Quick Breads & Muffins', '12.jpg', 'A muffin is an individual-sized, baked quick bread product.\r\n\r\nMuffins in the United States are similar to cupcakes in size and cooking methods, the main difference being that cupcakes tend to be sweet desserts using cake batter and which are often topped with sugar frosting. Muffins are available in both savory varieties, such as cornmeal and cheese muffins, or sweet varieties such as blueberry, chocolate chip or banana flavours. Muffins are often eaten as a breakfast food. Coffee may be served to accompany muffins. Fresh baked muffins are sold by bakeries, donut shops and some fast food restaurants and coffeehouses. Factory baked muffins are sold at grocery stores and convenience stores and they are also served in some coffee shops and cafeterias.'),
@@ -427,7 +429,7 @@ INSERT INTO `type` (`id`, `name`, `image`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Структура таблицы `user`
 --
 
 CREATE TABLE `user` (
@@ -440,7 +442,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Дамп данных таблицы `user`
 --
 
 INSERT INTO `user` (`id`, `role`, `name`, `email`, `status`, `password`) VALUES
@@ -453,25 +455,25 @@ INSERT INTO `user` (`id`, `role`, `name`, `email`, `status`, `password`) VALUES
 (7, 1, 'sveta', 'sveta@gmail.com', 1, 'sveta');
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `category`
+-- Индексы таблицы `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `recipe`
+-- Индексы таблицы `recipe`
 --
 ALTER TABLE `recipe`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userId` (`userId`),
-  ADD KEY `type` (`typeId`);
+  ADD KEY `userId` (`user_id`),
+  ADD KEY `type` (`type_id`);
 
 --
--- Indexes for table `recipe_category`
+-- Индексы таблицы `recipe_category`
 --
 ALTER TABLE `recipe_category`
   ADD PRIMARY KEY (`id`),
@@ -480,7 +482,7 @@ ALTER TABLE `recipe_category`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `recipe_comment`
+-- Индексы таблицы `recipe_comment`
 --
 ALTER TABLE `recipe_comment`
   ADD PRIMARY KEY (`id`),
@@ -488,14 +490,14 @@ ALTER TABLE `recipe_comment`
   ADD KEY `user_comment` (`user_id`);
 
 --
--- Indexes for table `recipe_ingridient`
+-- Индексы таблицы `recipe_ingridient`
 --
 ALTER TABLE `recipe_ingridient`
   ADD PRIMARY KEY (`id`),
   ADD KEY `recipe_id` (`recipe_id`);
 
 --
--- Indexes for table `recipe_prepare`
+-- Индексы таблицы `recipe_prepare`
 --
 ALTER TABLE `recipe_prepare`
   ADD PRIMARY KEY (`id`),
@@ -503,7 +505,7 @@ ALTER TABLE `recipe_prepare`
   ADD KEY `recipe_id` (`recipe_id`);
 
 --
--- Indexes for table `recipe_rating`
+-- Индексы таблицы `recipe_rating`
 --
 ALTER TABLE `recipe_rating`
   ADD PRIMARY KEY (`id`),
@@ -512,106 +514,106 @@ ALTER TABLE `recipe_rating`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `type`
+-- Индексы таблицы `type`
 --
 ALTER TABLE `type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Индексы таблицы `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `recipe`
+-- AUTO_INCREMENT для таблицы `recipe`
 --
 ALTER TABLE `recipe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `recipe_category`
+-- AUTO_INCREMENT для таблицы `recipe_category`
 --
 ALTER TABLE `recipe_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
--- AUTO_INCREMENT for table `recipe_comment`
+-- AUTO_INCREMENT для таблицы `recipe_comment`
 --
 ALTER TABLE `recipe_comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `recipe_ingridient`
+-- AUTO_INCREMENT для таблицы `recipe_ingridient`
 --
 ALTER TABLE `recipe_ingridient`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 --
--- AUTO_INCREMENT for table `recipe_prepare`
+-- AUTO_INCREMENT для таблицы `recipe_prepare`
 --
 ALTER TABLE `recipe_prepare`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
--- AUTO_INCREMENT for table `recipe_rating`
+-- AUTO_INCREMENT для таблицы `recipe_rating`
 --
 ALTER TABLE `recipe_rating`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `type`
+-- AUTO_INCREMENT для таблицы `type`
 --
 ALTER TABLE `type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- Constraints for dumped tables
+-- Ограничения внешнего ключа сохраненных таблиц
 --
 
 --
--- Constraints for table `recipe`
+-- Ограничения внешнего ключа таблицы `recipe`
 --
 ALTER TABLE `recipe`
-  ADD CONSTRAINT `recipe_type` FOREIGN KEY (`typeId`) REFERENCES `type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `recipe_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `recipe_type` FOREIGN KEY (`type_id`) REFERENCES `type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `recipe_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `recipe_category`
+-- Ограничения внешнего ключа таблицы `recipe_category`
 --
 ALTER TABLE `recipe_category`
   ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   ADD CONSTRAINT `category_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
 --
--- Constraints for table `recipe_comment`
+-- Ограничения внешнего ключа таблицы `recipe_comment`
 --
 ALTER TABLE `recipe_comment`
   ADD CONSTRAINT `comment_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `comment_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `recipe_ingridient`
+-- Ограничения внешнего ключа таблицы `recipe_ingridient`
 --
 ALTER TABLE `recipe_ingridient`
   ADD CONSTRAINT `ingridient_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `recipe_prepare`
+-- Ограничения внешнего ключа таблицы `recipe_prepare`
 --
 ALTER TABLE `recipe_prepare`
   ADD CONSTRAINT `prepare_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `recipe_rating`
+-- Ограничения внешнего ключа таблицы `recipe_rating`
 --
 ALTER TABLE `recipe_rating`
   ADD CONSTRAINT `rating_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,

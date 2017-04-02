@@ -8,7 +8,7 @@
 		?>
 		<li data-target="#myCarousel" data-slide-to="<?php echo $i; ?>" <?php echo $active; ?> ></li>
 		<?php
-			}
+			} 
 		?>	
     </ol>
 	<div class="carousel-inner" role="listbox">

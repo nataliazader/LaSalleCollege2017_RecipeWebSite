@@ -1,4 +1,4 @@
-<div class="navbar-wrapper">
+<div class="navbar-wrapper" ">
 	<div class="container" >
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
@@ -9,7 +9,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">The Best Recipes </a>
+					<a class="navbar-brand" href="index.php">The Best Recipes </a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
@@ -39,8 +39,8 @@
 					<ul class="nav navbar-nav navbar-right">
 						<?php if(empty($_SESSION['user']))
 						{?>
-						<button type="button" class="btn btn-default navbar-btn"  data-toggle="modal" data-target="#myModalSignIn" >Sign in</button>
-						<button type="button" class="btn btn-default navbar-btn">Sign up</button>
+						<button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myModalSignIn">Sign in</button>
+						<button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myModalSignUp">Sign up</button>
 						<?php  } else  
 						{?>
 							<li class="dropdown">

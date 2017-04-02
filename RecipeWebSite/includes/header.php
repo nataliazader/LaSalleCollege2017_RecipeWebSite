@@ -11,10 +11,10 @@
 	$recipe = new Recipe($database);
 	 
 	
-	$carousel = $category->getCarousel();
-	$categories = $category->getCategories(); 
+	$carousel = $category->getCategories();
+	$categories = $category->getCategories('none'); 
 	$types = $type->getTypes(); 
-	$recipes = $recipe->getRecipes();
+	
 	$user_email='';
 	$user_pass='';
 	
@@ -25,17 +25,17 @@
 		$_SESSION['user'] = $user->Verify($user_email,$user_pass);
 	}
 	
-	if(isset($_GET['category'])){
-		$search_category = $_GET['category'];
-		$header = "Recipies by Category";
-	}
-	
-	else if(isset($_GET['type'])){
-		$search_type = $_GET['type'];
-		$header = "Recipies by type";
+	if(isset($_GET)&&!empty($_GET)){
+		$search = $_GET;
+		if(!empty($_GET['category']))
+			$header = "Recipies by Category";
+		if(!empty($_GET['type']))
+			$header = "Recipies by Type";
+		$recipes = $recipe->getRecipes($search);
 	}
 	else{
-		$header = "Recipies TOP rating";
+		$header = "TOP Rating Recipies";
+		$recipes = $recipe->getRecipes();
 	}
 	
 ?>

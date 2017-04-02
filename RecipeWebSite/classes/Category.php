@@ -23,7 +23,7 @@ class Category{
 	}
 	
 	public function Create(){
-		$query = "INSERT INTO RECIPE(name,image) ";
+		$query = "INSERT INTO category(name,image) ";
 		$query .= "VALUES(?,?)";
 		
 		try{
@@ -36,25 +36,13 @@ class Category{
 		}catch(PDOException $e){
 			echo "Query INSERT Failed ".$e->getMessage();
 		}
-	}
+	}	
 	
-	public static function getCarousel(){
-		$query = "SELECT * FROM Category WHERE image not like '' ";
-			try{
-				$sql = self::$database->Connection->prepare($query);
-				$sql->execute();
-				
-				$result = $sql->fetchAll(PDO::FETCH_ASSOC);
-				return $result;
-				
-			}catch(PDOException $e)
-			{
-				echo "Query Category Failed: ".$e->getMessage();
-			}
-	}
-	
-	public static function getCategories(){
-		$query = "SELECT * FROM Category";
+	public static function getCategories( $params = '' ){
+		$where='';
+		if($params == '')
+			$where=" WHERE image not like '' ;";
+		$query = "SELECT * FROM Category ".$where;
 			try{
 				$sql = self::$database->Connection->prepare($query);
 				$sql->execute();

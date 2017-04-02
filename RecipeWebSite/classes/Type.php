@@ -15,8 +15,7 @@ class Type{
 		$this->description = $description;
 		self::$database = $database;
 	}
-	
-	
+		
 	public function Save(){
 		return isset($this->id)? $this->Update() : $this->Create();
 	}

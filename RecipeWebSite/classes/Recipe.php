@@ -60,7 +60,12 @@ class Recipe{
 		}
 	}
 	
-	public static function getRecipes(){
+	public static function getRecipes( $params = ''){
+		$where='';
+		if(isset($params['category']))
+			$where=" WHERE recipe.id IN ( SELECT recipe_id FROM recipe_category WHERE category_id = ".$params['category']." )" ;
+		if(isset($params['type']))
+			$where=" WHERE recipe.type_id = ".$params['type'];		
 		$query = "SELECT recipe.*,rating.rating,type.name as type
 				  FROM recipe 
 				  LEFT JOIN 
@@ -69,7 +74,8 @@ class Recipe{
                   GROUP BY recipe_id ORDER BY rating DESC) AS rating 
                   ON recipe.id=rating.recipe_id 
                   INNER JOIN type ON recipe.type_id = type.id
-                  GROUP BY recipe.id 
+                  ".$where."
+				  GROUP BY recipe.id 
 				  ORDER BY rating.rating DESC; ";
 		try{
 			$sql = self::$database->Connection->prepare($query);

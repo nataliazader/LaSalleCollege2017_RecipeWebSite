@@ -10,7 +10,7 @@ class User{
 
 	private static $database;
 	
-	function __construct($database , $id=null, $role=null, $name=null , $email = null, $status = null,$password = null ){
+	function __construct($database , $id=null, $name=null , $email = null, $password = null ){
 		$this->id = $id;
 		$this->role = $role;
 		$this->name = $name;
@@ -18,8 +18,7 @@ class User{
 		$this->status = $status;
 		$this->password = $password;
 		self::$database = $database;
-	}
-	
+	}	
 	
 	public function Save(){
 		return isset($this->id)? $this->Update() : $this->Create();
@@ -27,17 +26,17 @@ class User{
 	
 	public function Update(){
 		
-	}
-	
+	}	
+		
 	public function Create(){
-		$query = "INSERT INTO Type(name,image,description) ";
+		$query = "INSERT INTO User(name ,email ,password) ";
 		$query .= "VALUES(?,?,?)";
 
 		try{
 			$sql = self::$database->Connection->prepare($query);
 			$sql->bindParam(1, $this->name);
-			$sql->bindParam(7, $this->image);
-			$sql->bindParam(7, $this->description);
+			$sql->bindParam(7, $this->email);
+			$sql->bindParam(7, $this->password);
 			$sql->execute();
 			$last_id = self::$database->Connection->LastInsertId();			
 			return $last_id;			
@@ -59,6 +58,6 @@ class User{
 			{
 				echo "Query Category Failed: ".$e->getMessage();
 			}
-	}	
+	}
 }
 ?>

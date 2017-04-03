@@ -41,8 +41,10 @@ class Category{
 	public static function getCategories( $params = '' ){
 		$where='';
 		if($params == '')
-			$where=" WHERE image not like '' ;";
-		$query = "SELECT * FROM Category ".$where;
+			$where = " WHERE image not like '' ";
+		if(isset($params['category']))
+			$where = " WHERE id = ".$params['category'];
+		$query = "SELECT * FROM Category ".$where.";";
 			try{
 				$sql = self::$database->Connection->prepare($query);
 				$sql->execute();

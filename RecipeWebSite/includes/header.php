@@ -27,14 +27,23 @@
 	
 	if(isset($_GET)&&!empty($_GET)){
 		$search = $_GET;
-		if(!empty($_GET['category']))
-			$header = "Recipies by Category";
-		if(!empty($_GET['type']))
-			$header = "Recipies by Type";
+		if(!empty($_GET['category'])){
+			$cat = $category->getCategories($_GET);
+			$header = $cat[0]['name']." recipes";
+		}
+			
+		if(!empty($_GET['type'])){
+			$typ = $type->getTypes($_GET);
+			$header = $typ[0]['name']." recipes";			
+		}
+		
+		if(!empty($_GET['find'])){
+			$header = "Search for ".$_GET['find'];			
+		}		
 		$recipes = $recipe->getRecipes($search);
 	}
 	else{
-		$header = "TOP Rating Recipies";
+		$header = "TOP Rating recipes";
 		$recipes = $recipe->getRecipes();
 	}
 	

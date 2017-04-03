@@ -30,9 +30,9 @@
 							</ul>
 						</li>						
 					</ul>
-					<form class="navbar-form navbar-left">
+					<form class="navbar-form navbar-left" action="index.php" method="get">
 						<div class="form-group">
-						  <input type="text" class="form-control" placeholder="Find a recipe">
+						  <input type="text" class="form-control" name="find" placeholder="Find a recipe" required>
 						</div>
 						<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					</form>					

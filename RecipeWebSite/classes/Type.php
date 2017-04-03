@@ -41,8 +41,11 @@ class Type{
 		}
 	}
 	
-	public static function getTypes(){
-		$query = "SELECT * FROM type";
+	public static function getTypes($params = ''){
+		$where='';
+		if(isset($params['type']))
+			$where = " WHERE id = ".$params['type'];	
+		$query = "SELECT * FROM type".$where;
 
 			try{
 				$sql = self::$database->Connection->prepare($query);

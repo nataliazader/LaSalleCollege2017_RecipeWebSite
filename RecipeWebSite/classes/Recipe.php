@@ -62,10 +62,20 @@ class Recipe{
 	
 	public static function getRecipes( $params = ''){
 		$where='';
+		
 		if(isset($params['category']))
 			$where=" WHERE recipe.id IN ( SELECT recipe_id FROM recipe_category WHERE category_id = ".$params['category']." )" ;
+		
 		if(isset($params['type']))
 			$where=" WHERE recipe.type_id = ".$params['type'];		
+		
+		if(isset($params['find'])){
+			$where=" WHERE recipe.id IN ( SELECT recipe_category.recipe_id FROM recipe_category INNER JOIN category ON recipe_category.category_id = category.id WHERE category.name LIKE '%".$params['find']."%' )" ;
+			$where .=" OR recipe.id IN ( SELECT recipe_id FROM recipe_ingridient WHERE name LIKE '%".$params['find']."%' )" ;			
+			$where .=" OR recipe.name LIKE '%".$params['find']."%' ";
+			$where .=" OR type.name LIKE '%".$params['find']."%' ";			
+			}
+		
 		$query = "SELECT recipe.*,rating.rating,type.name as type
 				  FROM recipe 
 				  LEFT JOIN 

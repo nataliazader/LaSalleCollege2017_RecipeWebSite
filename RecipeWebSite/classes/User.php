@@ -10,7 +10,7 @@ class User{
 
 	private static $database;
 	
-	function __construct($database , $id=null, $name=null , $email = null, $password = null ){
+	function __construct($database , $id=null, $role = null, $name=null , $email = null, $status = null , $password = null ){
 		$this->id = $id;
 		$this->role = $role;
 		$this->name = $name;
@@ -46,7 +46,7 @@ class User{
 	}
 	
 	public static function Verify( $email, $password){
-		$query = "SELECT * FROM user WHERE email = '$email' AND password = '$password' " ;
+		$query = "SELECT * FROM user WHERE email = '$email' OR name = '$email'  AND password = '$password' " ;
 			try{
 				$sql = self::$database->Connection->prepare($query);
 				$sql->execute();
@@ -59,5 +59,20 @@ class User{
 				echo "Query Category Failed: ".$e->getMessage();
 			}
 	}
+	
+	public static function Exist( $name, $email){
+		$query = "SELECT * FROM user WHERE email = '$email' OR name = '$name' ; " ;
+			try{
+				$sql = self::$database->Connection->prepare($query);
+				$sql->execute();
+				
+				$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+				return $result;
+				
+			}catch(PDOException $e)
+			{
+				echo "Query Category Failed: ".$e->getMessage();
+			}
+	}	
 }
 ?>

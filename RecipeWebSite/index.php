@@ -5,13 +5,15 @@
 	<h2 style="text-align:center;margin-bottom:30px;"><?php echo $header; ?></h2>
 
 	<div class="container marketing">	    
-		<div class="row">
+		
 			<?php 
-				$i=0;
+				$i=1;
 				foreach($recipes as $value) {
-					if(!isset($_GET['category'])||!isset($_GET['type']))
-						if($i == 3)
+					if(empty($_GET))
+						if($i == 4)
 							break;
+			
+				echo ($i%3==0) ?  "<div class='row'>" :  "";
 			?>
 			<div class="col-lg-4">
 			  <img class="img-responsive center-block" src="public/img/recipe/<?php echo $value['image']; ?>" alt="Generic placeholder image" width="140" height="140">
@@ -22,10 +24,12 @@
 			</div>
 			
 			<?php 
+			echo ($i%3==0) ?  "</div>" : "";
 				$i++;
 				}
+			echo (($i-1)%3!=0)?  "</div>" : "";	
 			?>		
-		</div>
+		
 		<hr class="featurette-divider">
 		<?php require "includes/footer.php"?>
 	</div>
@@ -46,8 +50,8 @@
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="email">Email address</label>
-								<input type="email" class="form-control" name="email" placeholder="Email" required>
+								<label for="email">Email address or username</label>
+								<input type="text" class="form-control" name="email" placeholder="Email address or username" required>
 							  </div>
 							  <div class="form-group">
 								<label for="password">Password</label>

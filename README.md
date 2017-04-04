@@ -1,2 +1,2 @@
 # LaSalleCollege2017_RecipeWebSite
-PHP, HTML, CSS, Bootstrap, JavaScript
+MVC, PHP, HTML, CSS, Bootstrap, JavaScript

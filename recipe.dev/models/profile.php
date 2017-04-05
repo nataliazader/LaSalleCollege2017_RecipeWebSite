@@ -1,6 +1,18 @@
 <?php
 class ProfileModel extends Model{
 
+	private function fillNavbar(){		
+		$this->query("SELECT * FROM category");
+		$categories = $this->resultSet();
+
+		$this->query("SELECT * FROM type");
+		$types = $this->resultSet();
+
+		$result=array( 'categories' => $categories , 'types' => $types );
+
+		return $result;
+	}
+	
 	public function Index(){
 		$result='';
 
@@ -10,7 +22,8 @@ class ProfileModel extends Model{
 			$this->query($sql);
 			$recipes = $this->resultSet();
 
-			$result=array('recipes' => $recipes);
+			$result=$this->fillNavbar();
+			$result=array_merge($result,array('recipes' => $recipes));
 		}
 
 		return $result;

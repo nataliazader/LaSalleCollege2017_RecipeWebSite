@@ -17,12 +17,15 @@ class RecipeModel extends Model{
 
 		$params=array();
 		$where='';
+        $id='';
 		$url=parse_url($_SERVER["REQUEST_URI"]);
 		
 		if(!empty($url['query'])){
 			parse_str($url['query'], $params);
-				if(isset($params['id']))
-					$where=" WHERE recipe.id =".$params['id'] ;
+				if(isset($params['id'])){
+					$id=$params['id'];
+					$where=" WHERE recipe.id =".$id ;
+				}
 		}
 
 		$sql = "SELECT recipe.*,rating.rating,type.name as type
@@ -38,13 +41,22 @@ class RecipeModel extends Model{
 				  ORDER BY rating.rating DESC; ";
 
 		$this->query($sql);
-		$recipe = $this->resultSet();
+		$recipes = $this->resultSet();
 
-		$result=$this->fillNavbar();
+		$sql = "SELECT * FROM recipe_ingridient WHERE recipe_id = ".$id;
 
-		
+		$this->query($sql);
+		$ingridients = $this->resultSet();
 
-		$result = array_merge($result , array('recipes' => $recipe));
+		$sql = "SELECT * FROM recipe_prepare WHERE recipe_id = ".$id." ORDER BY step";
+
+		$this->query($sql);
+		$steps = $this->resultSet();
+
+
+		$result=$this->fillNavbar();		
+
+		$result = array_merge($result , array('recipes' => $recipes),  array('ingridients' =>$ingridients), array('steps' => $steps));
 		return $result;
 	}
 }

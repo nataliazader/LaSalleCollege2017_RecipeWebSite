@@ -3,11 +3,14 @@
 	<title>The best recipes</title>
 	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>public/css/bootstrap.css">
   <link href="<?php echo ROOT_PATH; ?>public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo ROOT_PATH; ?>public/css/style.css" rel="stylesheet">
   <script src="<?php echo ROOT_PATH; ?>public/js/jquery-3.2.0.min.js"></script>
   <script src="<?php echo ROOT_PATH; ?>public/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-default" style="margin-bottom: 0!important">
+	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0!important">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -16,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<?php echo ROOT_URL; ?>">The Best recipe</a>
+          <a class="navbar-brand" href="<?php echo ROOT_URL; ?>">The Best recipes</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -46,18 +49,19 @@
           <ul class="nav navbar-nav navbar-right">
             <?php if(isset($_SESSION['is_logged_in'])) : ?>
             <li><a href="<?php echo ROOT_URL; ?>">Welcome <?php echo $_SESSION['user_data']['name']; ?></a></li>
-            <li><a href="<?php echo ROOT_URL; ?>users/logout">Logout</a></li>
+            <button type="button" class="btn btn-default navbar-btn" onclick="location.href='<?php echo ROOT_URL; ?>users/logout'">Logout</button>
           <?php else : ?>
             <button type="button" class="btn btn-default navbar-btn" onclick="location.href='<?php echo ROOT_URL; ?>users/signin'">Sign in</button>
-            <button type="button" class="btn btn-default navbar-btn" onclick="location.href='<?php echo ROOT_URL; ?>users/signup'">Sign up</button>            
-          <?php endif; ?>
+            <button type="button" class="btn btn-default navbar-btn" onclick="location.href='<?php echo ROOT_URL; ?>users/signup'">Sign up</button>          <?php endif; ?>
           </ul>
         </div>
       </div>
     </nav>
+    <div style="margin-top: 50px">
       <?php Messages::display(); ?>
      	<?php require($view); ?>
-    <div class="container marketing">
+    <div>
+    <div class="container marketing" style="margin-top: 50px">
       <footer>
         <p class="pull-right"><a href="<?php echo ROOT_URL; ?>">Back to top</a></p>
         <p>© 2017 The Best Recipe, Inc.</p>

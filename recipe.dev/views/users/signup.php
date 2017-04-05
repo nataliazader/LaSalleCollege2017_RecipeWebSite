@@ -1,4 +1,4 @@
-<div class="panel panel-default" style="width:400px;margin:50px auto 50px auto">
+<div class="panel panel-default" style="width:400px;margin:100px auto 100px auto">
   <div class="panel-heading">
     <h3 class="panel-title">Sign Up</h3>
   </div>
@@ -13,7 +13,7 @@
     	<div class="form-group">
     		<input type="password" name="password" class="form-control" placeholder="Password" />
     	</div>
-    	<input class="btn btn-primary" name="submit" type="submit" value="Sign Up" />
+    	<input class="btn btn-default" name="submit" type="submit" value="Sign Up" />
     </form>
   </div>
 </div>

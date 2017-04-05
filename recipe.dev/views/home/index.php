@@ -1,4 +1,4 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px">
 	<ol class="carousel-indicators">
 		<?php
 			$active="class='active'";
@@ -21,7 +21,7 @@
 				$i++;
 		?>
 		<div class="item <?php echo $active; ?>">
-		  <img src="<?php echo ROOT_URL; ?>public/img/category/<?php echo $value['image']; ?>" alt="">
+		  <img style="width:100%" src="<?php echo ROOT_URL; ?>public/img/category/<?php echo $value['image']; ?>" alt="">
 		  <div class="container">
 			<div class="carousel-caption">
 			  <h1><?php echo $value['name']; ?> category</h1>
@@ -44,7 +44,8 @@
 	</a>
 </div>
 
-<div class="container marketing" style="margin-top: 20px">	    
+<div class="container marketing" style="margin-top: 20px">
+	<h2 style='text-align: center;margin-bottom: 40px'><?php echo ($viewmodel['header']);?></h2>	    
 	<?php 
 		$i=1;
 		foreach($viewmodel['recipes'] as $value) {

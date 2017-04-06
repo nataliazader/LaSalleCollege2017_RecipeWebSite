@@ -1,20 +1,10 @@
 <?php
 class RecipeModel extends Model{
 
-	private function fillNavbar(){		
-		$this->query("SELECT * FROM category");
-		$categories = $this->resultSet();
-
-		$this->query("SELECT * FROM type");
-		$types = $this->resultSet();
-
-		$result=array( 'categories' => $categories , 'types' => $types );
-
-		return $result;
-	}	
-
 	public function Index(){
 
+		$result=$this->FillNavbar();
+		
 		$params=array();
 		$where='';
         $id='';
@@ -53,10 +43,55 @@ class RecipeModel extends Model{
 		$this->query($sql);
 		$steps = $this->resultSet();
 
+		if(isset($_SESSION['user_data'])){
+			$sql = "SELECT * FROM user_favorite WHERE recipe_id = ".$id;
+			$this->query($sql);
+		    $favorite = $this->single();
+		    if($favorite)
+		    	$_SESSION['favorite'] = true;
+		    else
+		    	unset($_SESSION['favorite']);
+		}
 
-		$result=$this->fillNavbar();		
-
+		$this->Favorite();
 		$result = array_merge($result , array('recipes' => $recipes),  array('ingridients' =>$ingridients), array('steps' => $steps));
 		return $result;
 	}
+
+
+	private function Favorite(){
+		if(isset($_POST['favorite'])) {
+				if(!isset($_SESSION['favorite'])){
+					$this->query('INSERT INTO user_favorite (user_id, recipe_id) VALUES(:user_id, :recipe_id)');
+					$this->bind(':user_id', $_SESSION['user_data']['id']);
+					$this->bind(':recipe_id', $id);
+					$this->execute();
+					if($this->lastInsertId()){
+					Messages::setMsg('The recipe added to favorites.');
+					$_SESSION['favorite'] = true;
+					unset($_POST['favorite']);
+				}
+			}
+			else
+			{
+				$this->query('DELETE FROM user_favorite WHERE recipe_id ='.$id);
+				$count = $this->execute();
+				Messages::setMsg('The recipe deleted from favorites.');
+				unset($_SESSION['favorite']);
+				unset($_POST['favorite']);			
+			}
+		}
+	}
+
+	private function FillNavbar(){		
+		$this->query("SELECT * FROM category");
+		$categories = $this->resultSet();
+
+		$this->query("SELECT * FROM type");
+		$types = $this->resultSet();
+
+		$result=array( 'categories' => $categories , 'types' => $types );
+
+		return $result;
+	}	
 }

@@ -1,7 +1,21 @@
 <?php
 class ProfileModel extends Model{
+	
+	public function Index(){
+		
+		$result=$this->FillNavbar();
 
-	private function fillNavbar(){		
+		if(isset($_SESSION['user_data']) && isset($_POST['favorite'])){
+			$sql = "SELECT * FROM recipe WHERE id IN (SELECT recipe_id FROM user_favorite WHERE user_id=".$_SESSION['user_data']['id'].")";
+
+			$this->query($sql);
+			$recipes = $this->resultSet();
+			$result=array_merge($result,array('recipes' => $recipes));
+		}
+		return $result;
+	}
+
+	private function FillNavbar(){		
 		$this->query("SELECT * FROM category");
 		$categories = $this->resultSet();
 
@@ -9,22 +23,6 @@ class ProfileModel extends Model{
 		$types = $this->resultSet();
 
 		$result=array( 'categories' => $categories , 'types' => $types );
-
-		return $result;
-	}
-	
-	public function Index(){
-		$result='';
-
-		if(isset($_SESSION['user_data'])){
-			$sql = "SELECT * recipe WHERE user_id=".$_SESSION['user_data']['user_id'];
-
-			$this->query($sql);
-			$recipes = $this->resultSet();
-
-			$result=$this->fillNavbar();
-			$result=array_merge($result,array('recipes' => $recipes));
-		}
 
 		return $result;
 	}

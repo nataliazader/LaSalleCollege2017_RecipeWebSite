@@ -55,8 +55,23 @@
 	  <img class="img-responsive center-block" src="<?php echo ROOT_URL; ?>public/img/recipe/<?php echo $value['image']; ?>" alt="Generic placeholder image" width="140" height="140">
 	  <h2><?php echo $value['name']?></h2>
 	  <p><?php echo $value['description']; ?></p>
-	  <p style="font-size:bold">Rating <<< <?php echo $value['rating']; ?> </p>
-	  <p><a class="btn btn-default" href="<?php echo ROOT_URL; ?>recipe/index?id=<?php echo $value['id']; ?>" role="button">View recipe</a></p>
+	  <p style="font-size:bold">			
+	  	<div class="stars">
+				<form action="#" method="post">
+				    <input class="star star-5"  type="radio" name="star" <?php echo ($value['rating'] >= 4.5 ) ? 'checked' : '' ;?>/>
+				    <label class="star star-5" for="star-5" style="font-size:15px"></label>
+				    <input class="star star-4"  type="radio" name="star" <?php echo ($value['rating'] < 4.5 && $value['rating']>=3.5) ? 'checked' : '' ;?>/>
+				    <label class="star star-4" for="star-4" style="font-size:15px"></label>
+				    <input class="star star-3"  type="radio" name="star" <?php echo ($value['rating'] < 3.5  && $value['rating']>=2.5) ? 'checked' : '' ;?>/>
+				    <label class="star star-3" for="star-3" style="font-size:15px"></label>
+				    <input class="star star-2"  type="radio" name="star" <?php echo ($value['rating'] < 2.5 && $value['rating']>=1.5 ) ? 'checked' : '' ;?>/>
+				    <label class="star star-2" for="star-2" style="font-size:15px"></label>
+				    <input class="star star-1"  type="radio" name="star" <?php echo ($value['rating'] < 1.5 ) ? 'checked' : '' ;?>/>
+				    <label class="star star-1" for="star-1" style="font-size:15px"></label>
+				</form>			
+		</div>
+	</p>
+	<p><a class="btn btn-default" href="<?php echo ROOT_URL; ?>recipe/index?id=<?php echo $value['id']; ?>" role="button">View recipe</a></p>
 	</div>
 	
 	<?php 

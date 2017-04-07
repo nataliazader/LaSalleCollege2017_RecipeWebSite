@@ -48,7 +48,7 @@
           </form> 
           <ul class="nav navbar-nav navbar-right">
             <?php if(isset($_SESSION['is_logged_in'])) : ?>
-            <li><a href="<?php echo ROOT_URL; ?>">Welcome <?php echo $_SESSION['user_data']['name']; ?></a></li>
+            <li><a href="<?php echo ROOT_URL; ?>profile/index">Welcome <?php echo $_SESSION['user_data']['name']; ?></a></li>
             <button type="button" class="btn btn-default navbar-btn" onclick="location.href='<?php echo ROOT_URL; ?>users/logout'">Logout</button>
           <?php else : ?>
             <button type="button" class="btn btn-default navbar-btn" onclick="location.href='<?php echo ROOT_URL; ?>users/signin'">Sign in</button>

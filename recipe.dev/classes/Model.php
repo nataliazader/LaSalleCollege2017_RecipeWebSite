@@ -49,8 +49,4 @@ abstract class Model{
 		return $this->stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
-	public function delete($query){
-		$this->stmt->execute();
-	}
-
 }

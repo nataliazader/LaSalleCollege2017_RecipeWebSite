@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 05 2017 г., 17:46
+-- Время создания: Апр 07 2017 г., 03:15
 -- Версия сервера: 10.1.21-MariaDB
 -- Версия PHP: 5.6.30
 
@@ -169,7 +169,13 @@ CREATE TABLE `recipe_comment` (
 INSERT INTO `recipe_comment` (`id`, `recipe_id`, `comment`, `user_id`) VALUES
 (1, 4, 'Very delicious!!', 2),
 (2, 4, 'Fast to prepare!', 1),
-(3, 5, 'Yammi', 6);
+(3, 5, 'Yammi', 6),
+(4, 13, 'my favorite', 1),
+(5, 11, 'Healthy and very tasty!', 5),
+(6, 7, 'Fantastic!', 1),
+(8, 10, 'Looks delicious', 1),
+(9, 6, 'COOOL!\r\n', 1),
+(10, 4, 'Tasty!', 1);
 
 -- --------------------------------------------------------
 
@@ -461,6 +467,30 @@ INSERT INTO `user` (`id`, `role`, `name`, `email`, `status`, `password`) VALUES
 (16, 1, 'donald', 'donald@gmail.com', 1, '0d343c0f0ca763f983c8042350059f56'),
 (17, 1, 'serg', 'serg@gmail.com', 1, '94747a1470803117683bc8fad40ce2ec');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_favorite`
+--
+
+CREATE TABLE `user_favorite` (
+  `id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `recipe_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `user_favorite`
+--
+
+INSERT INTO `user_favorite` (`id`, `user_id`, `recipe_id`) VALUES
+(33, 1, 6),
+(40, 1, 14),
+(42, 5, 10),
+(43, 5, 14),
+(44, 5, 11),
+(45, 1, 15);
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -535,6 +565,12 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `name` (`name`);
 
 --
+-- Индексы таблицы `user_favorite`
+--
+ALTER TABLE `user_favorite`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -557,7 +593,7 @@ ALTER TABLE `recipe_category`
 -- AUTO_INCREMENT для таблицы `recipe_comment`
 --
 ALTER TABLE `recipe_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT для таблицы `recipe_ingridient`
 --
@@ -583,6 +619,11 @@ ALTER TABLE `type`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT для таблицы `user_favorite`
+--
+ALTER TABLE `user_favorite`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
